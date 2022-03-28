@@ -1,26 +1,32 @@
-const title = "Project name";
-let screens = "Simple, complex, interactive";
-let screenPrice = 3000;
-const rollback = 77;
-let fullPrice = 50000;
-const adaptive = true;
+'use strict';
 
-//Вывести в консоль тип данных значений переменных title, fullPrice, adaptive
-console.log('Тип данных переменной title - ' + typeof title);
-console.log('Тип данных переменной fullPrice - ' +typeof fullPrice);
-console.log('Тип данных переменной adaptive - ' +typeof adaptive);
-
-//Вывести в консоль длину строки screens
-console.log('Длина строки screens - ' + screens.length + ' символов');
-
-/*Вывести в консоль “Стоимость верстки экранов (screenPrice) рублей/ долларов/гривен/юани” и
- “Стоимость разработки сайта (fullPrice) рублей/ долларов/гривен/юани”*/
- console.log('Стоимость верстки экранов '+ screenPrice + ' рублей. \nСтоимость разработки сайта - ' + fullPrice + ' рублей.');
-
- //Привести строку screens к нижнему регистру и разбить строку на массив, вывести массив в консоль
- console.log(screens.toLowerCase().split(", "));
-
- //Вывести в консоль Процент отката посреднику за работу (fullPrice * (rollback/100))
+let title = prompt("Как называется ваш проект?", "Название проекта");
+let screens = prompt("Какие типы экранов нужно разработать?", "Простые, Сложные, Интерактивные");
+let screenPrice = +prompt("Сколько будет стоить данная работа?", "12000");
+let rollback = 30;
+let adaptive = confirm("Нужен ли адаптив на сайте?");
+let service1 = prompt("Какой дополнительный тип услуги нужен?");
+let servicePrice1 = +prompt("Сколько это будет стоить?");
+let service2 = prompt("Какой еще дополнительный тип услуги нужен?");
+let servicePrice2 = +prompt("Сколько это будет стоить?");
+let fullPrice = screenPrice + servicePrice1 + servicePrice2;
 let percent = fullPrice * (rollback/100);
-console.log('Сумма выплат посреднику '+ percent + ' рублей.');
+let servicePercentPrice = fullPrice - percent;
+console.log(Math.ceil(servicePercentPrice));
 
+switch(true){
+    case (fullPrice>=30000):
+        console.log("Даем скидку в 10%");
+        break;
+    case (fullPrice>=15000 && fullPrice<30000):
+        console.log("Даем скидку в 5%");
+        break;
+    case (fullPrice<15000 && fullPrice>=0):
+        console.log("Скидка не предусмотрена");
+        break;
+    case (fullPrice<0):
+        console.log("Что-то пошло не так:(");
+        break;
+    default:
+        console.log("Проверьте правильность введенных данных");
+}
