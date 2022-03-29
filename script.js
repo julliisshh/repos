@@ -9,24 +9,61 @@ let service1 = prompt("Какой дополнительный тип услуг
 let servicePrice1 = +prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой еще дополнительный тип услуги нужен?");
 let servicePrice2 = +prompt("Сколько это будет стоить?");
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;
-let percent = fullPrice * (rollback/100);
-let servicePercentPrice = fullPrice - percent;
-console.log(Math.ceil(servicePercentPrice));
+let fullPrice;
+let servicePercentPrice;
+let allServicePrices;
 
-switch(true){
-    case (fullPrice>=30000):
-        console.log("Даем скидку в 10%");
-        break;
-    case (fullPrice>=15000 && fullPrice<30000):
-        console.log("Даем скидку в 5%");
-        break;
-    case (fullPrice<15000 && fullPrice>=0):
-        console.log("Скидка не предусмотрена");
-        break;
-    case (fullPrice<0):
-        console.log("Что-то пошло не так:(");
-        break;
-    default:
-        console.log("Проверьте правильность введенных данных");
-}
+const showTypeOf = function(variable){
+console.log('Тип данных ' + variable, typeof variable);
+};
+
+
+const getRollbackMessage = function(price){
+    switch(true){
+        case (price>=30000):
+            return "Даем скидку в 10%";
+        case (price>=15000 && price<30000):
+            return "Даем скидку в 5%";
+        case (price<15000 && price>=0):
+            return "Скидка не предусмотрена";
+        case (price<0):
+            return "Что-то пошло не так:(";
+    }
+};
+
+
+const getAllServicePrices = function(){
+    return servicePrice1 + servicePrice2;
+};
+
+
+ function getFullPrice(){
+     return screenPrice + allServicePrices;
+ }
+
+
+const getTitle = function(){
+    title = title.trim();
+    return title[0].toUpperCase() + title.substring(1).toLowerCase();
+};
+
+
+const getServicePercentPrices = function(){
+ return fullPrice - (fullPrice * (rollback/100));
+};
+
+
+showTypeOf(title);
+showTypeOf(screenPrice);
+showTypeOf(adaptive);
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice();
+title = getTitle();
+servicePercentPrice = getServicePercentPrices();
+
+
+
+console.log('Длина строки screens - ' + screens.length + ' символов');
+console.log('Стоимость верстки экранов '+ screenPrice + ' рублей. \nСтоимость разработки сайта - ' + fullPrice + ' рублей.');
+console.log(getRollbackMessage(fullPrice));
+console.log('Cтоимость за вычетом процента отката посреднику - ' + servicePercentPrice);
